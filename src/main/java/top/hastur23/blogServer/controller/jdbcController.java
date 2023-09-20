@@ -1,4 +1,4 @@
-package top.hastur23.blogServer.Controller;
+package top.hastur23.blogServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
