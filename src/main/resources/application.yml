@@ -5,3 +5,10 @@ spring:
     username: hastur23
     password: Shikuc166017
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+##  映射文件位置  ##
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: top.hastur23.blogServer.entity
+  configuration:
+    map-underscore-to-camel-case: true
