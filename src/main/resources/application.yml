@@ -1,14 +1,15 @@
 ## database ##
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/blogserver?useUnicode=true&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blogserver
     username: hastur23
     password: Shikuc166017
-    driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 ##  映射文件位置  ##
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: top.hastur23.blogServer.entity
   configuration:
     map-underscore-to-camel-case: true
