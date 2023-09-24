@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.hastur23.blogServer.mapper.BlogItemMapper">
     <insert id="insertBlogItem" parameterType="BlogItem">
-        insert into blogItem (title, content, image, category) values (#{title},#{content},#{image},#{category})
+        insert into blogItem (alias, title, content, image, category) values (#{alias},#{title},#{content},#{image},#{category})
     </insert>
 
-    <select id="getBlogItem" parameterType="BlogItem" resultType="BlogItem">
-        select * from where category = #{category}
+    <select id="getBlogItem" parameterType="String" resultType="BlogItem">
+        select * from blogItem where alias = #{alias}
     </select>
 </mapper>

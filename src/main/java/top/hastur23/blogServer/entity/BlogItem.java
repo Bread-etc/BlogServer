@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class BlogItem {
     private int id;
+    private String alias;
     private String title;
     private String content;
     private String image;
