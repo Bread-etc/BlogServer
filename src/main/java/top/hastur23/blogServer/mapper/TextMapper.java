@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TextMapper {
     MainText getBlogText(MainText mainText);
+
+    int insertBlogText(MainText mainText);
 }

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="top.hastur23.blogServer.mapper.BlogItemMapper">
     <insert id="insertBlogItem" parameterType="BlogItem">
-        insert into blogItem (alias, title, content, image, category) values (#{alias},#{title},#{content},#{image},#{category})
+        insert into blogItem (alias, title, content, image, category, time) values (#{alias},#{title},#{content},#{image},#{category},#{time})
     </insert>
 
     <select id="getBlogItem" parameterType="String" resultType="BlogItem">

@@ -22,4 +22,14 @@ public class TextController {
             return Response.failure(500,"获取失败");
         }
     }
+
+    @PostMapping("/update/text")
+    public Response insertBlogText(@RequestBody MainText mainText) {
+        try {
+            int result = textService.insertBlogText(mainText);
+            return Response.success(result);
+        } catch (Exception e) {
+            return Response.failure(500, "更新文章失败");
+        }
+    }
 }

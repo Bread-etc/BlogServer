@@ -5,6 +5,8 @@ import top.hastur23.blogServer.mapper.BlogItemMapper;
 import top.hastur23.blogServer.entity.BlogItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 @Service
 public class BlogItemService {
     @Autowired
@@ -14,7 +16,12 @@ public class BlogItemService {
         return blogItemMapper.insertBlogItem(blogItem);
     }
 
-    public BlogItem getBlogItem(BlogItem blogItem) {
-        return blogItemMapper.getBlogItem(blogItem);
+    public List<BlogItem> getBlogItemByPage(int currentPage, int pageSize) {
+        int offset = (currentPage - 1) * pageSize;
+        return blogItemMapper.getBlogItemByPage(offset, pageSize);
+    }
+
+    public int getTotalCount() {
+        return blogItemMapper.getTotalCount();
     }
 }

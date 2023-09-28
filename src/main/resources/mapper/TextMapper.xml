@@ -6,4 +6,7 @@
     <select id="getBlogText" parameterType="int" resultType="MainText">
         select * from maintext where blogId = #{blogId}
     </select>
+    <insert id="insertBlogText" parameterType="String">
+        insert into maintext (text) values (#{text})
+    </insert>
 </mapper>

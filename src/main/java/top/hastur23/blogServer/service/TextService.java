@@ -13,4 +13,8 @@ public class TextService {
     public MainText getBlogText(MainText mainText) {
         return textMapper.getBlogText(mainText);
     }
+
+    public int insertBlogText(MainText mainText) {
+        return textMapper.insertBlogText(mainText);
+    }
 }
