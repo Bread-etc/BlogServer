@@ -7,33 +7,34 @@ import top.hastur23.blogServer.util.rsaUtils;
 
 import java.util.Objects;
 
-public interface LoginService {
-    String login(String encryptedPassword);
-}
-
 @Service
-public class LoginServiceImpl implements LoginService {
+public class LoginService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
-    @Override
-    public String login(String encrypedPassword) {
+    public boolean login(String username, String encryptedPassword) {
         try {
             // 从 Redis 中获取私钥
             String privateKey = redisTemplate.opsForValue().get("privateKey");
             if (Objects.isNull(privateKey)) {
-                return "Private key not found in Redis";
+                throw new RuntimeException("Private key not found in Redis");
             }
 
             // 解密
-            String decryptedPassword = rsaUtils.decrypt(encrypedPassword, privateKey);
+            String decryptedPassword = rsaUtils.decrypt(encryptedPassword, privateKey);
 
-            // 返回 token 实例
-            return "Token1234324";
+            if ("root".equals(username) && "GG166017".equals(decryptedPassword)) {
+                // 如果用户名密码正确返回 true ,让用户进入/admin界面
+                return true;
+            } else {
+                return false;
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
-            return "An error occured during login!";
+            return false;
         }
     }
 }

@@ -41,3 +41,8 @@
 - 完善`rsaUtils`工具类
 - 完成获取公钥接口`/getPublicKey`
 - 加入`LoginController`
+- 加入`Redis`数据库
+
+### 2023/10/29 (13)
+- 添加跨域配置`CorsConfig`
+- 完善`LoginController`
