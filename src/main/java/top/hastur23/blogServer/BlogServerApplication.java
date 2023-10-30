@@ -21,6 +21,7 @@ public class BlogServerApplication {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.addAllowedOrigin("http://127.0.0.1:3030");
+		config.addAllowedOrigin("http://127.0.0.1:5050");
 		config.addAllowedHeader("*");
 		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);

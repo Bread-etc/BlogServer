@@ -46,3 +46,6 @@
 ### 2023/10/29 (13)
 - 添加跨域配置`CorsConfig`
 - 完善`LoginController`
+
+### 2023/10/30 (14)
+- 修复跨域请求问题`BlogServerApplication.addAllowedOrigin()`
