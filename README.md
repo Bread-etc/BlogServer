@@ -49,3 +49,8 @@
 
 ### 2023/10/30 (14)
 - 修复跨域请求问题`BlogServerApplication.addAllowedOrigin()`
+
+### 2023/11/1 (15)
+- 了解`JWT`
+- 添加`JWTUtils`工具类
+- 添加`User`模型

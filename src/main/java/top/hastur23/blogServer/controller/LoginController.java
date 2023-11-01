@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import top.hastur23.blogServer.entity.Response;
 import top.hastur23.blogServer.service.LoginService;
 
+import java.util.Map;
+
 @RestController
 public class LoginController {
 
@@ -14,8 +16,11 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public Response login(@RequestParam String username, @RequestParam String encryptedPassword) {
+    public Response login(@RequestParam Map<String, String> request) {
         try {
+
+            String username = request.get("username");
+            String encryptedPassword = request.get("encryptedPassword");
             // 调用 LoginService 进行登录验证
             boolean loginResult = loginService.login(username, encryptedPassword);
 
