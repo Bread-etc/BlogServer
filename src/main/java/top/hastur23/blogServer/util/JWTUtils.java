@@ -1,41 +1,42 @@
 package top.hastur23.blogServer.util;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 
-import java.util.Calendar;
-import java.util.Map;
+import javax.crypto.SecretKey;
+import java.util.Date;
 
 public class JWTUtils {
-    // 密钥
-    private static final String SING = "Bread_etc";
-
-    /*
-     * 生成token
-     * */
-    public static String getToken(Map<String, String> map) {
-        Calendar instance = Calendar.getInstance();
-        // 默认 7天 过期
-        instance.add(Calendar.DATE, 7);
-        // 创建jwt builder
-        JWTCreator.Builder builder = JWT.create();
-
-        map.forEach((k, v) -> {
-            builder.withClaim(k, v);
-        });
-
-        String token = builder.withExpiresAt(instance.getTime())
-                .sign(Algorithm.HMAC256(SING));
-        return token;
+    // 有效时间为 3天
+    private static long expirationTime = 1000 * 60 * 60 * 24 * 3;
+    private static SecretKey signatrue = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    public static String createToken(String username){
+        JwtBuilder jwtBuilder = Jwts.builder();
+        String jwtToken = jwtBuilder
+                // header
+                .setHeaderParam("typ", "JWT")
+                .setHeaderParam("alg", "HS256")
+                // payload
+                .claim("username", username)
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                // signatrue
+                .signWith(SignatureAlgorithm.HS256, signatrue)
+                .compact();
+        return jwtToken;
     }
 
-    /*
-     * 验证 token 合法性
-     * */
-    public static DecodedJWT verify(String token) {
-        // 返回验证结果 (结果是内置的)
-        return JWT.require(Algorithm.HMAC256(SING)).build().verify(token);
+    // 验证 token 有效性
+    public static boolean validateToken(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(signatrue)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return !claims.getExpiration().before(new Date());
+        } catch (ExpiredJwtException e) {
+            return false;
+        }
     }
 }

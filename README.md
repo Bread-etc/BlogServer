@@ -60,3 +60,9 @@
 
 ### 2023/11/3 (17)
 - 完善jwt
+
+### 2023/11/4 (18)
+- 添加`config`目录,加入`WebMvcConfig`用于拦截器
+- 添加`interceptor`,加入拦截器验证token - `TokenInterceptor`
+- 加入实体`LoginResult`
+- 修改`JWTUtils`工具类
