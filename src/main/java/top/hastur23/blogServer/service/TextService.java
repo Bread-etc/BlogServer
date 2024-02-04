@@ -2,19 +2,19 @@ package top.hastur23.blogServer.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import top.hastur23.blogServer.entity.MainText;
-import top.hastur23.blogServer.mapper.TextMapper;
+import top.hastur23.blogServer.entity.AliasInfo;
+import top.hastur23.blogServer.mapper.AliasInfoMapper;
 
 @Service
 public class TextService {
     @Autowired
-    TextMapper textMapper;
+    AliasInfoMapper aliasInfoMapper;
 
-    public MainText getBlogText(MainText mainText) {
-        return textMapper.getBlogText(mainText);
+    public AliasInfo getBlogText(AliasInfo aliasInfo) {
+        return aliasInfoMapper.getBlogText(aliasInfo);
     }
 
-    public int insertBlogText(MainText mainText) {
-        return textMapper.insertBlogText(mainText);
+    public int insertBlogText(AliasInfo aliasInfo) {
+        return aliasInfoMapper.insertBlogText(aliasInfo);
     }
 }

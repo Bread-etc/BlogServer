@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import top.hastur23.blogServer.entity.MainText;
+import top.hastur23.blogServer.entity.AliasInfo;
 import top.hastur23.blogServer.entity.Response;
 import top.hastur23.blogServer.service.TextService;
 
@@ -14,9 +14,9 @@ public class TextController {
     private TextService textService;
 
     @PostMapping("/info/text")
-    public Response getBlogText(@RequestBody MainText mainText) {
+    public Response getBlogText(@RequestBody AliasInfo aliasInfo) {
         try {
-            MainText result = textService.getBlogText(mainText);
+            AliasInfo result = textService.getBlogText(aliasInfo);
             return Response.success(result);
         } catch (Exception e) {
             return Response.failure(500,"获取失败");
@@ -24,9 +24,9 @@ public class TextController {
     }
 
     @PostMapping("/update/text")
-    public Response insertBlogText(@RequestBody MainText mainText) {
+    public Response insertBlogText(@RequestBody AliasInfo aliasInfo) {
         try {
-            int result = textService.insertBlogText(mainText);
+            int result = textService.insertBlogText(aliasInfo);
             return Response.success(result);
         } catch (Exception e) {
             return Response.failure(500, "更新文章失败");

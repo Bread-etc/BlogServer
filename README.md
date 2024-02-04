@@ -66,3 +66,7 @@
 - 添加`interceptor`,加入拦截器验证token - `TokenInterceptor`
 - 加入实体`LoginResult`
 - 修改`JWTUtils`工具类
+
+### 2024/2/4 (19)
+- 添加`DataTableItem`类以及一系列增删改的方法
+- 加入entity `AliasInfo` 和 `DataTableItem`

@@ -1,13 +1,13 @@
 package top.hastur23.blogServer.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import top.hastur23.blogServer.entity.BlogItem;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Mapper
 public interface BlogItemMapper {
     int insertBlogItem(BlogItem blogItem);
 
