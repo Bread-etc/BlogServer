@@ -1,6 +1,5 @@
 package top.hastur23.blogServer.service;
 
-import org.apache.ibatis.type.Alias;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.hastur23.blogServer.entity.DataTableItem;
@@ -40,13 +39,19 @@ public class DataTableService {
     }
 
 
-    // 删除指定 id 的数据
-    public int deleteDataTableItem(int id) {
-        return dataTableMapper.deleteDataTableItem(id);
+    // 删除指定 id 的数据 (重新排序)
+    public boolean deleteDataTableItem(String alias) {
+        return dataTableMapper.deleteDataTableItem(alias);
     }
 
-    // 新增 newBlog 的数据
-    public void insertDataTableItem(Alias newBlog) {
-        return dataTableMapper.insertDataTableItem(newBlog);
+    // 创建新的记录并保存到数据库 (blogitem)
+    public void createNewItem(int newId, String fileName) {
+        DataTableItem dataTableItem = new DataTableItem();
+        dataTableItem.setId(newId);
+        // title = alias (初始化)
+        dataTableItem.setTitle(fileName);
+        dataTableItem.setAlias(fileName);
+        dataTableMapper.createNewItem(dataTableItem);
     }
+
 }

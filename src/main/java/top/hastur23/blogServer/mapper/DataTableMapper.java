@@ -1,7 +1,11 @@
 package top.hastur23.blogServer.mapper;
 
-import org.apache.ibatis.annotations.*;
-import top.hastur23.blogServer.entity.AliasInfo;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Delete;
 import top.hastur23.blogServer.entity.DataTableItem;
 
 import java.util.List;
@@ -22,10 +26,11 @@ public interface DataTableMapper {
     DataTableItem getDataTableItemById(int id);
 
     // 删除数据 (blogitem)
-    @Delete("delete from blogitem where id = #{id}")
-    int deleteDataTableItem(int id);
+    @Delete("delete from blogitem where alias = #{alias}")
+    boolean deleteDataTableItem(String alias);
 
     // 添加数据 (blogitem) [仅仅是上传文件,读取文件名作为title和alias, title后续再通过其他api修改]
-    @Insert("insert into blogitem (title, alias) values (#{title}, #{alias})")
-    void insertDataTableItem(AliasInfo aliasInfo);
+    @Insert("insert into blogitem (id, title, alias) values (#{id}, #{title}, #{alias})")
+    int createNewItem(DataTableItem dataTableItem);
+
 }

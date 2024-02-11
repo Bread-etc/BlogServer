@@ -70,3 +70,9 @@
 ### 2024/2/4 (19)
 - 添加`DataTableItem`类以及一系列增删改的方法
 - 加入entity `AliasInfo` 和 `DataTableItem`
+
+### 2024/2/11 (20)
+- 修改`DataTable`和`AliasInfo`一系列的接口
+- 增加上传文件功能
+- 增加删除功能
+- 修改数据库部分属性

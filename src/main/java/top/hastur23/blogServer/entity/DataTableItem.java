@@ -2,6 +2,8 @@ package top.hastur23.blogServer.entity;
 
 import lombok.Data;
 
+import java.sql.Date;
+
 @Data
 public class DataTableItem {
     // id: No
@@ -16,4 +18,6 @@ public class DataTableItem {
     private String alias;
     // img: 封面图片
     private String image;
+    // time: 发布时间
+    private Date time;
 }

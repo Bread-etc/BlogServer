@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.hastur23.blogServer.mapper.AliasInfoMapper">
+    <select id="getMaxId" resultType="int">
+        select max(id) from maintext
+    </select>
+    <insert id="createNewText" parameterType="AliasInfo">
+        insert into maintext (id, alias) values (#{id}, #{alias})
+    </insert>
+    <delete id="deleteMainText" parameterType="String">
+        delete from maintext where alias = #{alias}
+    </delete>
+</mapper>

@@ -9,7 +9,6 @@ import java.util.List;
 
 @Mapper
 public interface BlogItemMapper {
-    int insertBlogItem(BlogItem blogItem);
 
     @Select("select * from blogitem LIMIT #{offset}, #{pageSize}")
     List<BlogItem> getBlogItemByPage(@Param("offset") int offset, @Param("pageSize") int pageSize);

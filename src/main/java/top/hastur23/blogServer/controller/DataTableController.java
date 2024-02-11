@@ -36,16 +36,4 @@ public class DataTableController {
             return Response.failure(500, "修改异常");
         }
     }
-
-    // 删除指定博客
-    @DeleteMapping("/dataTable/delete")
-    public Response deleteDataTableItem(@RequestBody int id) {
-        try {
-            // 正常删除返回 1
-            int deleteResult = dataTableService.deleteDataTableItem(id);
-            return Response.success(deleteResult);
-        } catch (Exception e) {
-            return Response.failure(500, "删除异常");
-        }
-    }
 }

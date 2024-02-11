@@ -12,10 +12,6 @@ public class BlogItemService {
     @Autowired
     BlogItemMapper blogItemMapper;
 
-    public int insertBlogItem(BlogItem blogItem) {
-        return blogItemMapper.insertBlogItem(blogItem);
-    }
-
     public List<BlogItem> getBlogItemByPage(int currentPage, int pageSize) {
         int offset = (currentPage - 1) * pageSize;
         return blogItemMapper.getBlogItemByPage(offset, pageSize);

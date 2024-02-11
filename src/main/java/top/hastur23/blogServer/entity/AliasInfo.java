@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AliasInfo {
-    private int blogId;
+    private int id;
     private String alias;
 }

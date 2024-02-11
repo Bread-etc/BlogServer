@@ -17,16 +17,6 @@ public class BlogController {
     @Autowired
     private BlogItemService blogItemService;
 
-    @PostMapping("/update/blogItem")
-    public Response insertBlogItem(@RequestBody BlogItem blogItem) {
-        try {
-            int result = blogItemService.insertBlogItem(blogItem);
-            return Response.success(result);
-        } catch (Exception e) {
-            return Response.failure(500, "服务器异常");
-        }
-    }
-
     @PostMapping("/info/blogItem")
     public Response getBlogItem(@RequestBody Map<String, Integer> params) {
         try {
