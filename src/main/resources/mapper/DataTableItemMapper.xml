@@ -16,6 +16,6 @@
         delete from blogitem where alias = #{alias}
     </delete>
     <insert id="createNewItem" parameterType="DataTableItem">
-        insert into blogitem (title, alias) values (#{title}, #{alias})
+        insert into blogitem (id, title, alias, time) values (#{id}, #{title}, #{alias}, #{time})
     </insert>
 </mapper>

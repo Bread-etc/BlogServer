@@ -31,6 +31,7 @@ public class AliasInfoController {
     public ResponseEntity<String> fileUpload(@RequestParam("file") MultipartFile file) {
 
         String fileName = file.getOriginalFilename();
+
         if (fileName == null) {
             return ResponseEntity.badRequest().body("上传文件不能为空");
         }

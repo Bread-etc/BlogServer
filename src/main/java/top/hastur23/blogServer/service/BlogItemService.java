@@ -9,14 +9,17 @@ import java.util.List;
 
 @Service
 public class BlogItemService {
+
     @Autowired
     BlogItemMapper blogItemMapper;
 
+    // 查询所有博客
     public List<BlogItem> getBlogItemByPage(int currentPage, int pageSize) {
         int offset = (currentPage - 1) * pageSize;
         return blogItemMapper.getBlogItemByPage(offset, pageSize);
     }
 
+    // 查询博客数量
     public int getTotalCount() {
         return blogItemMapper.getTotalCount();
     }

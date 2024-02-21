@@ -1,9 +1,14 @@
 package top.hastur23.blogServer.mapper;
 
-import top.hastur23.blogServer.entity.WebInfo;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
-@Repository
+import java.util.Date;
+
+@Mapper
 public interface WebInfoMapper {
-    WebInfo getWebInfo(WebInfo webInfo);
+
+    // 查询最后更新时间
+    @Select("select time from blogItem order by id desc limit 1")
+    Date getLastTime();
 }

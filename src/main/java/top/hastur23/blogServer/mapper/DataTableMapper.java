@@ -30,7 +30,7 @@ public interface DataTableMapper {
     boolean deleteDataTableItem(String alias);
 
     // 添加数据 (blogitem) [仅仅是上传文件,读取文件名作为title和alias, title后续再通过其他api修改]
-    @Insert("insert into blogitem (id, title, alias) values (#{id}, #{title}, #{alias})")
+    @Insert("insert into blogitem (id, title, alias, time) values (#{id}, #{title}, #{alias}, #{time})")
     int createNewItem(DataTableItem dataTableItem);
 
 }

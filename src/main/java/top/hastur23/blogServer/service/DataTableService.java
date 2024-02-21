@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import top.hastur23.blogServer.entity.DataTableItem;
 import top.hastur23.blogServer.mapper.DataTableMapper;
 
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -51,6 +53,12 @@ public class DataTableService {
         // title = alias (初始化)
         dataTableItem.setTitle(fileName);
         dataTableItem.setAlias(fileName);
+
+        // 获取当前系统时间
+        LocalDate uploadTime = LocalDate.now();
+        Date date = Date.valueOf(uploadTime);
+        // 添加上传时间
+        dataTableItem.setTime(date);
         dataTableMapper.createNewItem(dataTableItem);
     }
 

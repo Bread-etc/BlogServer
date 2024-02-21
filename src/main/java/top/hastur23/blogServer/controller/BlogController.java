@@ -14,16 +14,21 @@ import java.util.Map;
 
 @RestController
 public class BlogController {
+
     @Autowired
     private BlogItemService blogItemService;
 
     @PostMapping("/info/blogItem")
     public Response getBlogItem(@RequestBody Map<String, Integer> params) {
         try {
+            // 当前页数
             int currentPage = params.get("currentPage");
-            int pageSize = 5;   // 返回pageSize为5
+            // 一页内最大返回数量
+            int pageSize = 5;
+
             List<BlogItem> blogItemList = blogItemService.getBlogItemByPage(currentPage, pageSize);
             int totalCount = blogItemService.getTotalCount();
+
             Map<String, Object> data = new HashMap<>();
             data.put("currentPage", currentPage);
             data.put("pageSize", pageSize);
