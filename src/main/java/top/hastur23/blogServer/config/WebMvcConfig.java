@@ -1,16 +1,25 @@
 package top.hastur23.blogServer.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import top.hastur23.blogServer.interceptor.TokenInterceptor;
+
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TokenInterceptor())
-                .addPathPatterns("/home/**", "/admin/**");
+    public void addCorsMappings(CorsRegistry registry) {
+        // 设置允许跨域的路由
+        registry.addMapping("/**")
+                .allowedOrigins("http://43.139.65.244")
+                // 设置允许跨域请求的域名
+                .allowedOriginPatterns("*")
+                // 是否允许证书
+                .allowCredentials(true)
+                // 设置允许的方法
+                .allowedMethods("*")
+                // 跨域允许时间
+                .maxAge(3600);
     }
 }

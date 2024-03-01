@@ -11,10 +11,10 @@ import java.util.List;
 public interface BlogItemMapper {
 
     // 查询所有的博客信息, 并进行分页
-    @Select("select * from blogitem LIMIT #{offset}, #{pageSize}")
+    @Select("select * from blogItem LIMIT #{offset}, #{pageSize}")
     List<BlogItem> getBlogItemByPage(@Param("offset") int offset, @Param("pageSize") int pageSize);
 
     // 查询博客数量
-    @Select("select count(alias) from blogitem")
+    @Select("select count(alias) from blogItem")
     int getTotalCount();
 }

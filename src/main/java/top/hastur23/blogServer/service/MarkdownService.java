@@ -6,16 +6,24 @@ import top.hastur23.blogServer.entity.MarkdownFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class MarkdownService {
 
     public MarkdownFile getMarkdownContent(String alias) {
-        // String markdownFilePath = "/home/blog_articles" + alias + ".md"
-        String markdownFilePath = "src/main/resources/static/" + alias + ".md";
-        String markdownContent = readMarkdownFile(markdownFilePath);
+        try {
+            // 构建文件路径
+            Path markdownFilePath = Paths.get("/home/blog_articles", alias + ".md");
 
-        return new MarkdownFile(markdownContent);
+            String markdownContent = Files.readString(markdownFilePath);
+
+            return new MarkdownFile(markdownContent);
+        } catch (IOException e) {
+            return null;
+        }
     }
 
     private String readMarkdownFile(String filePath) {

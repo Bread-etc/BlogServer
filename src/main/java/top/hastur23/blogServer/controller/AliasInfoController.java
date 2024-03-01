@@ -3,10 +3,7 @@ package top.hastur23.blogServer.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import top.hastur23.blogServer.entity.Response;
 import top.hastur23.blogServer.service.AliasInfoService;
@@ -20,6 +17,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 @RestController
+@RequestMapping("/api")
 public class AliasInfoController {
     @Autowired
     private AliasInfoService aliasInfoService;
@@ -35,15 +33,15 @@ public class AliasInfoController {
         if (fileName == null) {
             return ResponseEntity.badRequest().body("上传文件不能为空");
         }
-        String fileNameWithoutExtentsion = new File(fileName).getName().replaceFirst("[.][^.]+$", "");
+        String fileNameWithoutExtension = new File(fileName).getName().replaceFirst("[.][^.]+$", "");
 
         try {
             // 检查文件是否存在
             boolean fileExists = aliasInfoService.checkFileExists(fileName);
 
             // 如果文件不存在, 则创建一个新的记录, 并将文件保存到目标目录
-            //Path paths = Paths.get("~/home/blog_articles", fileName);
-            Path filePath = Paths.get("src/main/resources/static", fileName);
+            Path filePath = Paths.get("/home/blog_articles", fileName);
+            // Path filePath = Paths.get("src/main/resources/static", fileName);
             if (!fileExists) {
                 int newId = aliasInfoService.getMaxId() + 1;
 
@@ -51,8 +49,8 @@ public class AliasInfoController {
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
                 // 创建新的记录并保存到数据库 (保存不包含后缀的文件名)
-                aliasInfoService.createNewText(newId, fileNameWithoutExtentsion);
-                dataTableService.createNewItem(newId, fileNameWithoutExtentsion);
+                aliasInfoService.createNewText(newId, fileNameWithoutExtension);
+                dataTableService.createNewItem(newId, fileNameWithoutExtension);
             } else {
                 // 文件已经存在, 则覆盖现有的文件
                 Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
@@ -69,17 +67,15 @@ public class AliasInfoController {
     public Response deleteMainText(@RequestParam String alias) {
         try {
             // 删除成功
-            String filePath = "src/main/resources/static/" + alias + ".md";
-
-            // 创建 File 对象
-            File file = new File(filePath);
+            // String filePath = "src/main/resources/static/" + alias + ".md";
+            Path filePath = Paths.get("/home/blog_articles", alias + ".md");
 
             // 检查文件是否存在并且是一个文件
-            if (file.exists() && file.isFile()) {
+            if (Files.exists(filePath) && Files.isRegularFile(filePath)) {
                 // 删除文件
                 boolean deleteInAlias = aliasInfoService.deleteMainText(alias);
                 boolean deleteInBlogItem = dataTableService.deleteDataTableItem(alias);
-                boolean deleteResult = file.delete() && deleteInAlias && deleteInBlogItem;
+                boolean deleteResult = Files.deleteIfExists(filePath) && deleteInAlias && deleteInBlogItem;
 
                 if (deleteResult) {
                     return Response.success("文件删除成功");

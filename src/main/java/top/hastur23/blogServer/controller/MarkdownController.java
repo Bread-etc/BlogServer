@@ -9,6 +9,7 @@ import top.hastur23.blogServer.service.MarkdownService;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class MarkdownController {
 
     @Autowired

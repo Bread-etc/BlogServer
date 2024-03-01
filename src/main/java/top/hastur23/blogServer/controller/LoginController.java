@@ -2,6 +2,7 @@ package top.hastur23.blogServer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.hastur23.blogServer.entity.LoginResult;
@@ -13,6 +14,7 @@ import top.hastur23.blogServer.util.JWTUtils;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api")
 public class LoginController {
 
     @Autowired
@@ -41,7 +43,6 @@ public class LoginController {
                 return Response.failure(401, "invalid Password");
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return Response.failure(500, "Login failed");
         }
     }

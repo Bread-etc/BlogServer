@@ -9,6 +9,7 @@ import top.hastur23.blogServer.service.DataTableService;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class DataTableController {
 
     @Autowired

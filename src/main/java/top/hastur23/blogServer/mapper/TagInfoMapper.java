@@ -23,7 +23,7 @@ public interface TagInfoMapper {
     int getArticleNum();
 
     // 查询第一篇文章的 date 属性
-    @Select("select min(time) from blogitem limit 1")
+    @Select("select min(time) from blogItem limit 1")
     LocalDate getFirstDate();
 
     // 获取 songLink 内的链接link
